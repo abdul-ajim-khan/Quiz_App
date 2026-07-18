@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Quiz Web App</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="quiz-header">
+      <div class="header">
+        <div class="logo">
+          <div class="logo-icon">
+            <div
+              class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-md"
+              data-fg-d3bl10="0.8:1.28206:/src/app/App.tsx:160:7:4045:667:e:div:e"
+              data-fgid-d3bl10=":r40:"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                data-fg-d3bl11="0.8:1.28206:/src/app/App.tsx:161:9:4144:555:e:svg:ete"
+                data-fgid-d3bl11=":r41:"
+              >
+                <path
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  data-fg-d3bl12="0.8:1.28206:/src/app/App.tsx:162:11:4215:286:e:path"
+                ></path>
+                <path
+                  d="M9 12l2 2 4-4"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  data-fg-d3bl13="0.8:1.28206:/src/app/App.tsx:169:11:4512:172:e:path"
+                ></path>
+              </svg>
+            </div>
+          </div>
+
+          <h2>QuizPro</h2>
+        </div>
+
+        <div class="header-right">
+          <div class="user">
+            Hi,
+
+            <span id="userName"> User </span>
+          </div>
+
+          <div class="timer" id="timerBox">
+            <i class="ri-time-line"></i>
+
+            <span id="timer"> 10:00 </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </header>
+
+    <main class="quiz-container">
+      <div class="quiz-info">
+        <div class="question-count" id="questionCount">Question 1 of 10</div>
+
+        <div class="answered">
+          <span id="answeredCount"> 0 </span>
+
+          of
+
+          <span id="totalQuestions"> 10 </span>
+
+          answered
+        </div>
+      </div>
+
+      <section class="quiz-card">
+        <h2 id="question">Loading Question...</h2>
+
+        <div id="options" class="options"></div>
+      </section>
+
+      <div class="navigator" id="navigator"></div>
+
+      <div class="buttons">
+        <button class="btn btn-outline" id="prevBtn">
+          <i class="ri-arrow-left-s-line"></i>
+
+          Previous
+        </button>
+
+        <button class="btn btn-primary" id="nextBtn">
+          Next
+
+          <i class="ri-arrow-right-s-line"></i>
+        </button>
+
+        <button class="btn btn-success" id="submitBtn">Submit Quiz</button>
+      </div>
+    </main>
+
+    <script src="questions.js"></script>
+
+    <script src="quiz.js"></script>
+  </body>
+</html>

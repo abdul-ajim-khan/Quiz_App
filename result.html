@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Quiz Web App</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="result-header">
+      <div class="header">
+        <div class="logo">
+          <div class="logo-icon">
+            <div
+              class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-md"
+              data-fg-d3bl10="0.8:1.28206:/src/app/App.tsx:160:7:4045:667:e:div:e"
+              data-fgid-d3bl10=":r40:"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                data-fg-d3bl11="0.8:1.28206:/src/app/App.tsx:161:9:4144:555:e:svg:ete"
+                data-fgid-d3bl11=":r41:"
+              >
+                <path
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  data-fg-d3bl12="0.8:1.28206:/src/app/App.tsx:162:11:4215:286:e:path"
+                ></path>
+                <path
+                  d="M9 12l2 2 4-4"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  data-fg-d3bl13="0.8:1.28206:/src/app/App.tsx:169:11:4512:172:e:path"
+                ></path>
+              </svg>
+            </div>
+          </div>
+
+          <h2>QuizPro</h2>
+        </div>
+
+        <div class="user">
+          Hi,
+          <span id="userName"></span>
+        </div>
+      </div>
+    </header>
+    <div class="con">
+      <main class="main container2">
+        <section class="result-card">
+          <h1>Quiz Completed!</h1>
+
+          <p>
+            Here are your results,
+            <span id="studentName"></span>
+          </p>
+
+          <div class="progress-wrapper">
+            <svg class="progress-svg" width="180" height="180">
+              <circle class="bg-circle" cx="90" cy="90" r="55"></circle>
+
+              <circle
+                id="progressCircle"
+                class="progress-circle"
+                cx="90"
+                cy="90"
+                r="55"
+              ></circle>
+            </svg>
+
+            <div class="progress-text">
+              <h2 id="percentage">0%</h2>
+            </div>
+          </div>
+
+          <div id="gradeBadge" class="grade-badge">Needs Improvement</div>
+
+          <div class="stats">
+            <div class="stat-box">
+              <i class="ri-focus-2-line score-icon"></i>
+
+              <h2 id="score">0/10</h2>
+
+              <p>Score</p>
+            </div>
+
+            <div class="stat-box">
+              <i class="ri-checkbox-circle-fill correct-icon"></i>
+
+              <h2 id="correct">0</h2>
+
+              <p>Correct</p>
+            </div>
+
+            <div class="stat-box">
+              <i class="ri-close-circle-fill wrong-icon"></i>
+
+              <h2 id="wrong">0</h2>
+
+              <p>Incorrect</p>
+            </div>
+          </div>
+
+          <div class="buttons">
+            <button id="reviewBtn" class="btn btn-outline">
+              Review Answers
+            </button>
+
+            <button id="retryBtn" class="btn btn-primary">Try Again</button>
+          </div>
+        </section>
+
+        <section id="reviewSection" class="review-section">
+          <h2>Answer Review</h2>
+
+          <div id="reviewContainer"></div>
+        </section>
+      </main>
+
+      <template id="reviewTemplate">
+        <div class="review-card">
+          <div class="review-header">
+            <button class="toggle-btn">✓</button>
+
+            <h3 class="question">Question</h3>
+          </div>
+
+          <div class="review-body">
+            <div class="options"></div>
+          </div>
+        </div>
+      </template>
+    </div>
+
+    <script src="questions.js"></script>
+
+    <script src="result.js"></script>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Quiz Web App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="background">
+      <div class="top-bg"></div>
+
+      <div class="bottom-bg"></div>
+    </div>
+
+    <main class="container">
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="ri-clipboard-line"></i>
+        </div>
+
+        <h2>QuizPro</h2>
+      </div>
+
+      <section class="card">
+        <h1>Create your account</h1>
+
+        <p class="subtitle">Sign up to start taking quizzes</p>
+
+        <form id="registerForm" novalidate>
+          <div class="input-group">
+            <label for="name"> Full Name </label>
+
+            <input type="text" id="name" placeholder="e.g. John Smith" />
+
+            <small class="error-message"></small>
+          </div>
+
+          <div class="input-group">
+            <label for="email"> Email Address </label>
+
+            <input type="email" id="email" placeholder="john@example.com" />
+
+            <small class="error-message"></small>
+          </div>
+
+          <div class="input-group">
+            <label for="password"> Password </label>
+
+            <div class="password-box">
+              <input
+                type="password"
+                id="password"
+                placeholder="Minimum 6 characters"
+              />
+
+              <i class="ri-eye-line toggle-password" data-target="password">
+              </i>
+            </div>
+
+            <small class="error-message"></small>
+          </div>
+
+          <div class="input-group">
+            <label for="confirmPassword"> Confirm Password </label>
+
+            <div class="password-box">
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Re-enter your password"
+              />
+
+              <i
+                class="ri-eye-line toggle-password"
+                data-target="confirmPassword"
+              >
+              </i>
+            </div>
+
+            <small class="error-message"></small>
+          </div>
+
+          <button type="submit">Create Account</button>
+        </form>
+
+        <div class="bottom-text">
+          Already have an account?
+
+          <a href="/login.html"> Sign In </a>
+        </div>
+      </section>
+    </main>
+
+    <script src="register.js"></script>
+  </body>
+</html>

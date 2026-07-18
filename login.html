@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Quiz web app</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="background">
+      <div class="top-bg"></div>
+
+      <div class="bottom-bg"></div>
+    </div>
+
+    <main class="container">
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="ri-clipboard-line"></i>
+        </div>
+
+        <h2>QuizPro</h2>
+      </div>
+
+      <section class="card">
+        <h1>Welcome back!</h1>
+
+        <p class="subtitle">Sign in to continue to your quiz</p>
+
+        <form id="loginForm" novalidate>
+          <div class="input-group">
+            <label for="email"> Email Address </label>
+
+            <input type="email" id="email" placeholder="john@example.com" />
+
+            <small class="error-message"></small>
+          </div>
+
+          <div class="input-group">
+            <label for="password"> Password </label>
+
+            <div class="password-box">
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+              />
+
+              <i class="ri-eye-line toggle-password" data-target="password"></i>
+            </div>
+
+            <small class="error-message"></small>
+          </div>
+
+          <div class="forgot-wrapper">
+            <a href="#"> Forgot password? </a>
+          </div>
+
+          <button type="submit">Sign In & Start Quiz</button>
+        </form>
+
+        <div class="bottom-text">
+          Don't have an account?
+
+          <a href="register.html"> Register now </a>
+        </div>
+      </section>
+    </main>
+
+    <script src="login.js"></script>
+  </body>
+</html>
