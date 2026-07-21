@@ -471,7 +471,7 @@ body {
 
   align-items: center;
 
-  margin-bottom: 16px;
+  margin-bottom: 1px;
 }
 
 .question-count {
@@ -502,7 +502,7 @@ body {
   padding: 26px;
 
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
-
+  min-height: 422px;
   border: 1px solid #eceef9;
 }
 
@@ -644,7 +644,7 @@ body {
 
   gap: 10px;
 
-  margin: 26px 0;
+  margin: 16px 0;
 }
 
 .nav-btn {
@@ -944,7 +944,7 @@ body {
   .navigator {
     gap: 8px;
 
-    margin: 22px 0;
+    margin: 12px 0;
   }
 
   .nav-btn {

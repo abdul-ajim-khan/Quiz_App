@@ -2,7 +2,6 @@ const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
 if (!currentUser) {
   alert("Please login first.");
-
   window.location.href = "login.html";
 }
 
@@ -31,21 +30,74 @@ const submitBtn = document.getElementById("submitBtn");
 const timer = document.getElementById("timer");
 
 const timerBox = document.getElementById("timerBox");
+const optionLetters = ["A", "B", "C", "D"];
 
 let currentQuestion = 0;
 
-let userAnswers = new Array(questions.length).fill(null);
-
 let timeLeft = 600;
 
-totalQuestions.textContent = questions.length;
+let questions = [];
+
+let userAnswers = [];
+
+async function fetchQuestions() {
+  const response = await fetch("https://opentdb.com/api.php?amount=100");
+
+  const data = await response.json();
+
+  return data.results
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 10)
+    .map((q, index) => {
+      const options = [...q.incorrect_answers, q.correct_answer];
+
+      options.sort(() => Math.random() - 0.5);
+
+      return {
+        id: index + 1,
+
+        question: q.question,
+
+        options: options,
+
+        answer: options.indexOf(q.correct_answer),
+      };
+    });
+}
+
+async function initQuiz() {
+  try {
+    const savedQuestions = JSON.parse(sessionStorage.getItem("quizQuestions"));
+
+    if (savedQuestions) {
+      questions = savedQuestions;
+    } else {
+      questions = await fetchQuestions();
+
+      sessionStorage.setItem("quizQuestions", JSON.stringify(questions));
+      localStorage.setItem("demoQuestion", JSON.stringify(questions));
+    }
+    userAnswers = new Array(questions.length).fill(null);
+
+    totalQuestions.textContent = questions.length;
+    restoreProgress();
+    loadQuestion();
+    startTimer();
+  } catch (error) {
+    console.error(error);
+    alert("Failed to load quiz questions.");
+  }
+}
+initQuiz();
 
 function loadQuestion() {
+  if (!questions.length) return;
+
   const question = questions[currentQuestion];
 
   questionCount.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
 
-  questionText.textContent = question.question;
+  questionText.innerHTML = question.question;
 
   optionsContainer.innerHTML = "";
 
@@ -60,20 +112,18 @@ function loadQuestion() {
 
     optionDiv.innerHTML = `
 
-            <div class="option-letter">
+      <div class="option-letter">
+        ${optionLetters[index]}
+      </div>
 
-                ${optionLetters[index]}
-
-            </div>
-
-    <div class="option-text">
+      <div class="option-text">
         ${option
           .replace(/&/g, "&amp;")
           .replace(/</g, "&lt;")
           .replace(/>/g, "&gt;")}
-    </div>
+      </div>
 
-        `;
+    `;
 
     optionDiv.addEventListener("click", () => {
       selectOption(index);
@@ -88,7 +138,6 @@ function loadQuestion() {
 
   updateButtons();
 }
-
 function selectOption(index) {
   userAnswers[currentQuestion] = index;
 
@@ -107,6 +156,7 @@ function updateProgress() {
 
 function updateNavigator() {
   navigatorBox.innerHTML = "";
+  const remainingTime = JSON.parse(sessionStorage.getItem("remainingTime"));
 
   questions.forEach((question, index) => {
     const button = document.createElement("button");
@@ -117,8 +167,10 @@ function updateNavigator() {
 
     if (index === currentQuestion) {
       button.classList.add("active");
-    } else if (userAnswers[index] !== null) {
+    } else if (Number.isInteger(userAnswers[index]) === true) {
       button.classList.add("answered");
+    } else {
+      button.classList.remove("answered");
     }
 
     button.addEventListener("click", () => {
@@ -222,7 +274,7 @@ function saveProgress() {
     currentQuestion,
   );
 
-  localStorage.setItem(
+  sessionStorage.setItem(
     "remainingTime",
 
     timeLeft,
@@ -234,7 +286,7 @@ function restoreProgress() {
 
   const savedQuestion = localStorage.getItem("currentQuestion");
 
-  const savedTime = localStorage.getItem("remainingTime");
+  const savedTime = sessionStorage.getItem("remainingTime");
 
   if (savedAnswers) {
     userAnswers = savedAnswers;
@@ -257,8 +309,6 @@ const interval = setInterval(() => {
   saveProgress();
 }, 1000);
 
-startTimer();
-
 submitBtn.addEventListener("click", () => {
   const confirmSubmit = confirm("Are you sure you want to submit the quiz?");
 
@@ -266,6 +316,7 @@ submitBtn.addEventListener("click", () => {
     submitQuiz();
   }
 });
+console.log(userAnswers);
 
 function submitQuiz() {
   clearInterval(interval);
@@ -280,12 +331,11 @@ function submitQuiz() {
 
   questions.forEach((question, index) => {
     const selected = userAnswers[index];
-
     if (selected === null) {
       skipped++;
     } else if (selected === question.answer) {
       correct++;
-    } else {
+    } else if (selected !== question.answer) {
       incorrect++;
     }
 
@@ -370,7 +420,7 @@ function submitQuiz() {
 
   localStorage.removeItem("currentQuestion");
 
-  localStorage.removeItem("remainingTime");
-
+  sessionStorage.removeItem("remainingTime");
+  sessionStorage.removeItem("quizQuestions");
   window.location.href = "result.html";
 }

@@ -26,6 +26,9 @@ const retryBtn = document.getElementById("retryBtn");
 
 const reviewContainer = document.getElementById("reviewContainer");
 
+const demoQuestion = JSON.parse(localStorage.getItem("demoQuestion")) || [];
+let questions = demoQuestion;
+
 userName.textContent =
   currentUser.fullName.charAt(0).toUpperCase() +
     currentUser.fullName.slice(1) || "User";
@@ -91,7 +94,11 @@ if (percent >= 90) {
 }
 
 const reviewTemplate = document.getElementById("reviewTemplate");
-
+function decodeHTML(str) {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = str;
+  return txt.value;
+}
 questions.forEach((question, index) => {
   const clone = reviewTemplate.content.cloneNode(true);
 
@@ -107,7 +114,7 @@ questions.forEach((question, index) => {
 
   const optionsContainer = clone.querySelector(".options");
 
-  questionTitle.textContent = `${index + 1}. ${question.question}`;
+  questionTitle.textContent = `${index + 1}. ${decodeHTML(question.question)}`;
 
   optionsContainer.innerHTML = "";
 
@@ -126,7 +133,12 @@ questions.forEach((question, index) => {
 
     text.className = "option-text";
 
-    text.textContent = option;
+    text.innerHTML = option
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
 
     optionBox.appendChild(letter);
 
@@ -170,6 +182,8 @@ retryBtn.addEventListener("click", () => {
   localStorage.removeItem("quizResult");
 
   localStorage.removeItem("quizAnswers");
+  sessionStorage.removeItem("quizQuestions");
+  localStorage.removeItem("demoQuestion");
 
   localStorage.removeItem("quizTime");
 
