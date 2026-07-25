@@ -34,7 +34,7 @@ const optionLetters = ["A", "B", "C", "D"];
 
 let currentQuestion = 0;
 
-let timeLeft = 600;
+let timeLeft = 10;
 
 let questions = [];
 
