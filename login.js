@@ -116,5 +116,5 @@ form.addEventListener("submit", function (e) {
     JSON.stringify(currentUser),
   );
 
-  window.location.href = "quiz.html";
+  window.location.href = "index.html";
 });
