@@ -187,7 +187,7 @@ retryBtn.addEventListener("click", () => {
 
   localStorage.removeItem("quizTime");
 
-  window.location.href = "quiz.html";
+  window.location.href = "index.html";
 });
 
 const history = JSON.parse(localStorage.getItem("quizHistory")) || [];
@@ -213,7 +213,7 @@ localStorage.setItem(
 if (!quizResult || Object.keys(quizResult).length === 0) {
   alert("No quiz result found.");
 
-  window.location.href = "quiz.html";
+  window.location.href = "index.html";
 }
 
 console.log("Current User :", currentUser);
