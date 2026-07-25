@@ -1,7 +1,6 @@
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
 if (!currentUser) {
-  alert("Please login first.");
   window.location.href = "login.html";
 }
 
